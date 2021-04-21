@@ -1,4 +1,4 @@
-let sceduler = [
+let scheduler = [
     {
         time: 9,
         task: ""
@@ -28,27 +28,26 @@ let sceduler = [
         task: ""
     }
 ]
-let myTasks = JSON.parse(localStorage.getItem("Tasks")) || [];
-let arrr=[];
 
-getTasks();
-getToday();
+let myTasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+let storageArray=[];
+
+
 // -------------- Getting Todays Date --------------
 function getToday() {
     var currentDate = moment().format('dddd MMMM Do YYYY');
     $("#currentDay").text(currentDate);
-    console.log(currentDate)
+    
 }
 // -------------- Getting tasks from local storage when we load the page--------------
 function getTasks(){
     myTasks = JSON.parse(localStorage.getItem("Tasks"))
     if (myTasks == null){
-        myTasks = sceduler;   
+        myTasks = scheduler;   
     } else {
          renderTasks();
     } 
 }
-
 // -------------- Rendering tasks to each input when we load the page --------------
 function renderTasks(){
     $("li").each(function(index) {
@@ -57,24 +56,40 @@ function renderTasks(){
 }
 // -------------- Setting Tasks to local storage --------------
 function setTasks(){
-    localStorage.setItem("Tasks", JSON.stringify(sceduler));
+    localStorage.setItem("Tasks", JSON.stringify(scheduler));
 }
 // -------------- Button click event --------------
 $(".btn").on("click", function(event){
     event.preventDefault();
     $("li").each(function(index) {
-        arrr[index] = $(this).find("input").val();
+        storageArray[index] = $(this).find("input").val();
    });
-   console.log("arr: ",arrr) 
-    for (i=0; i < sceduler.length; i++){
-        sceduler[i].task = arrr[i];
+   console.log("storageArray: ",storageArray) 
+    for (i=0; i < scheduler.length; i++){
+        scheduler[i].task = storageArray[i];
     }
     setTasks();
-  
 })
 
+function checkIfPassed() {
+  var currentTime = moment().format('HH') ;
+  $("li").each(function(index) {
+    if (scheduler[index].time > currentTime) {
+        $(this).find("input").css("background-color", "green");
+    }
+    if (scheduler[index].time < currentTime){
+    $(this).find("input").css("background-color", "gray");
+    }
+    if (scheduler[index].time == currentTime){
+        $(this).find("input").css("background-color", "	rgba(255, 0, 0, 0.74)");
+        }
+});
+}
 
- 
+
+getTasks();
+getToday();
+checkIfPassed()
 
 
 
