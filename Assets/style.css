@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
 }
@@ -36,10 +36,11 @@ textarea {
   border-top: 1px solid white;
 }
 
-.hour {
-  background-color: #ffffff;
+.time-span {
   color: #000000;
-  border-top: 1px dashed #000000;
+  position: relative;
+  top: 50%;
+  margin-right: 2%;
 }
 
 .past {
@@ -68,4 +69,8 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+}
+
+.list-group-item {
+  padding-bottom: 0px;
 }
