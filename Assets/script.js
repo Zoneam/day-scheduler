@@ -29,16 +29,15 @@ let scheduler = [
     }
 ]
 
-let myTasks = JSON.parse(localStorage.getItem("Tasks")) || [];
+let myTasks;
 let storageArray=[];
-
 
 // -------------- Getting Todays Date --------------
 function getToday() {
     var currentDate = moment().format('dddd MMMM Do YYYY');
     $("#currentDay").text(currentDate);
-    
 }
+
 // -------------- Getting tasks from local storage when we load the page--------------
 function getTasks(){
     myTasks = JSON.parse(localStorage.getItem("Tasks"))
@@ -48,16 +47,19 @@ function getTasks(){
          renderTasks();
     } 
 }
+
 // -------------- Rendering tasks to each input when we load the page --------------
 function renderTasks(){
     $("li").each(function(index) {
          $(this).find("input").val(myTasks[index].task);
     });
 }
+
 // -------------- Setting Tasks to local storage --------------
 function setTasks(){
     localStorage.setItem("Tasks", JSON.stringify(scheduler));
 }
+
 // -------------- Button click event --------------
 $(".btn").on("click", function(event){
     event.preventDefault();
@@ -71,6 +73,7 @@ $(".btn").on("click", function(event){
     setTasks();
 })
 
+// -------------- Check the time and color scheduler  --------------
 function checkIfPassed() {
   var currentTime = moment().format('HH') ;
   $("li").each(function(index) {
@@ -81,15 +84,14 @@ function checkIfPassed() {
     $(this).find("input").css("background-color", "gray");
     }
     if (scheduler[index].time == currentTime){
-        $(this).find("input").css("background-color", "	rgba(255, 0, 0, 0.74)");
+        $(this).find("input").css("background-color", "	red");
         }
 });
 }
 
-
-getTasks();
 getToday();
-checkIfPassed()
+getTasks();
+checkIfPassed();
 
 
 

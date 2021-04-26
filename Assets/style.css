@@ -40,6 +40,7 @@ textarea {
   color: #000000;
   position: relative;
   top: 50%;
+  width: 70px;
   margin-right: 2%;
 }
 
@@ -73,4 +74,8 @@ textarea {
 
 .list-group-item {
   padding-bottom: 0px;
+}
+
+.form-control {
+  color: wheat;
 }
