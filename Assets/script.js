@@ -32,9 +32,43 @@ let scheduler = [
 let myTasks;
 let storageArray=[];
 
+function createBlocks() {
+    let container = $(".container")
+    let amPm
+    $.each(scheduler, function(i)
+    {
+         if (scheduler[i].time >= 12){
+            amPm = ":00pm"
+             } else {
+                amPm = ":00am"
+             }
+        let li = $('<li/>')
+            .addClass('list-group-item list-group-item-primary')
+            .appendTo(container);
+        let div1 = $('<div>')
+            .addClass('input-group mb-3')
+            .appendTo(li);
+            $("<span>")
+            .addClass("time-span")
+            .text(scheduler[i].time + amPm)
+            .appendTo(div1);
+            $("<input>")
+            .addClass("form-control")
+            .attr("type", "text")
+            .appendTo(div1)
+        let  div2 = $("<div>")
+            .addClass('input-group-append').appendTo(div1)
+            $("<button>")
+            .addClass("btn btn-outline-secondary saveBtn")
+            .text("Save")
+            .appendTo(div2)
+    });
+
+}
+
 // -------------- Getting Todays Date --------------
 function getToday() {
-    var currentDate = moment().format('dddd MMMM Do YYYY');
+    let currentDate = moment().format('dddd MMMM Do YYYY');
     $("#currentDay").text(currentDate);
 }
 
@@ -61,7 +95,8 @@ function setTasks(){
 }
 
 // -------------- Button click event --------------
-$(".btn").on("click", function(event){
+$(document).ready(function() {
+    $(".btn").on("click", function(event){
     event.preventDefault();
     $("li").each(function(index) {
         storageArray[index] = $(this).find("input").val();
@@ -72,10 +107,11 @@ $(".btn").on("click", function(event){
     }
     setTasks();
 })
+})
 
 // -------------- Check the time and color scheduler  --------------
 function checkIfPassed() {
-  var currentTime = moment().format('HH') ;
+  let currentTime = moment().format('HH') ;
   $("li").each(function(index) {
     if (scheduler[index].time > currentTime) {
         $(this).find("input").css("background-color", "green");
@@ -89,6 +125,9 @@ function checkIfPassed() {
 });
 }
 
+
+
+createBlocks();
 getToday();
 getTasks();
 checkIfPassed();

@@ -34,6 +34,7 @@ THEN the saved events persist
      [x] If time is passed it colors inputs gray
      [x] If time is Current it colors input red
      [x] If time is in future it colors inputs green
+     [x] Dynamicli creating Bootstrap elements
 
 ---
 
