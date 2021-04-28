@@ -2,7 +2,7 @@
 
 ---
 
----
+## Deployed https://zoneam.github.io/day-scheduler/
 
 ## Acceptance Criteria for Day Planner
 
